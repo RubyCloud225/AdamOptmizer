@@ -1,5 +1,9 @@
 # Adam Optimizer in C++
 
+[![Build](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com)
+[![Docker](https://img.shields.io/badge/docker-supported-blue)](https://www.docker.com/)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 This project implements the Adam optimization algorithm in C++. The Adam optimizer is widely used in machine learning and deep learning for training models due to its adaptive learning rate capabilities.
 
 ## Features
