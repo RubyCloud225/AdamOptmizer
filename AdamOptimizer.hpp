@@ -6,7 +6,7 @@
 
 class AdamOptimizer {
     public:
-        AdamOptimizer(std::vector<double>& params, double learning_rate = 1e-3, std::tuple<double, double>beta = std::make_tuple(0.9, 0.999), double eps = 1e-8, double weight_decay = 0.0, bool amsgrad = false);
+    explicit AdamOptimizer(std::vector<double>& params, double learning_rate = 1e-3, const std::tuple<double, double> &beta = std::make_tuple(0.9, 0.999), double eps = 1e-8, double weight_decay = 0.0, bool amsgrad = false);
         void step(const std::vector<double>& grads);
     private:
         std::vector<double>& params; // Parameters to Optimize
