@@ -1,0 +1,8 @@
+services:
+  adam-optimizer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: adam-optimizer
+    working_dir: /app
+    command: ./build/AdamOptmizer

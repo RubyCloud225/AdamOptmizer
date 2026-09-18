@@ -11,19 +11,68 @@ This project implements the Adam optimization algorithm in C++. The Adam optimiz
 
 ## Requirements
 
-- A C++ compiler that supports C++11 or later (e.g., Clang, GCC).
-- CMake (optional, for building).
+- Docker and Docker Compose installed
+- Or a local C++ toolchain with CMake
 
 ## Files
 
 - `main.cpp`: Contains the main function demonstrating the usage of the Adam optimizer.
 - `AdamOptimizer.hpp`: Header file declaring the `AdamOptimizer` class.
 - `AdamOptimizer.cpp`: Implementation of the `AdamOptimizer` class.
+- `Dockerfile`: Builds the project inside a container.
+- `docker-compose.yml`: Runs the project with Docker Compose.
 
-## Compilation
+## Local compilation
 
-To compile the project, navigate to the directory containing the source files and run the following command:
+To build the project on your machine without Docker:
 
 ```bash
-clang++ -o adam_optimizer main.cpp AdamOptimizer.cpp -std=c++11
+mkdir -p build
+cmake -S . -B build
+cmake --build build
+./build/AdamOptmizer
+```
+
+## Docker Compose
+
+To build and run the project in a container:
+
+```bash
+docker-compose up --build
+```
+
+Or, with the newer Compose plugin:
+
+```bash
+docker compose up --build
+```
+
+This will compile the code inside the container and run the optimizer demo automatically.
+
+## Adam optimizer math
+
+Adam maintains two exponentially weighted moving averages:
+
+- first moment: $m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t$
+- second moment: $v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2$
+
+Because these estimates are biased toward zero early in training, Adam applies bias correction:
+
+- $\hat{m}_t = \frac{m_t}{1 - \beta_1^t}$
+- $\hat{v}_t = \frac{v_t}{1 - \beta_2^t}$
+
+The parameter update is then:
+
+- $\theta_t = \theta_{t-1} - \alpha \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$
+
+where:
+
+- $\theta_t$ is the parameter value
+- $g_t$ is the gradient at time $t$
+- $\alpha$ is the learning rate
+- $\beta_1, \beta_2$ are the exponential decay rates
+- $\epsilon$ prevents division by zero
+
+This project also supports the AMSGrad variant, which keeps the maximum of the past squared gradients when computing the denominator.
+
  
