@@ -15,9 +15,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Changed
 - Updated the project build instructions to use CMake in a supported version range
+- Switched the Docker base image from Debian to Ubuntu 22.04 to align with the project’s preferred environment
 
 ### Fixed
 - Resolved the CMake version mismatch preventing the project from configuring on the installed toolchain
+- Verified the Dockerized build and Compose runtime work successfully with the Ubuntu image
 
 ## [1.0.0] - 2026-09-18
 
